@@ -75,6 +75,7 @@ static const Layout layouts[] = {
 
 // Autostart
 static const char *const autostart[] = {
+    "st", "-e", "cd", "~/.local/src/dwm", NULL,
     "sh", "-c", "setbg",  NULL,
     "dwmblocks",          NULL,
     "unclutter",          NULL,
@@ -158,8 +159,10 @@ static Key keys[] = {
     { Mod4Mask,                     XK_o,         incnmaster,     {.i = -1 } },
     { Mod4Mask,                     XK_h,         setmfact,       {.f = -0.05} },
     { Mod4Mask,                     XK_l,         setmfact,       {.f = +0.05} },
-    { Mod4Mask|Mod1Mask,            XK_0,         togglegaps,     {0} },
-    { Mod4Mask|Mod1Mask|ShiftMask,  XK_0,         defaultgaps,    {0} },
+    { Mod4Mask|Mod1Mask,            XK_BackSpace, togglegaps,     {0} },
+    { Mod4Mask|Mod1Mask,            XK_0,         defaultgaps,    {0} },
+    { Mod4Mask|Mod1Mask,            XK_equal,     incrgaps,       {.i = +5} },
+    { Mod4Mask|Mod1Mask,            XK_minus,     incrgaps,       {.i = -5} },
 
     { Mod4Mask|ShiftMask,           XK_Return,    zoom,           {0} },
     { Mod4Mask,                     XK_q,         killclient,     {0} },
