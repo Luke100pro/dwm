@@ -17,7 +17,6 @@ static unsigned int systraypinning  = 0;  // 0: sloppy systray follows selected 
 static unsigned int systrayspacing  = 2;  // systray spacing
 static int systraypinningfailfirst  = 1;  // 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor
 static int showsystray              = 1;  // 0 means no systray
-static int systrayiconsize          = 12; // max icon size
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -167,6 +166,7 @@ static Key keys[] = {
     { Mod4Mask|ShiftMask,           XK_q,         quit,           {0} },
 
     { Mod4Mask,                     XK_space,     togglefloating, {0} },
+    { Mod4Mask,                     XK_F11,       togglefullscr,  {0} },
 //  { Mod4Mask|ShiftMask,           XK_space,     setlayout,      {0} },
 //  { Mod4Mask,                     XK_t,         setlayout,      {.v = &layouts[0]} },
 //  { Mod4Mask,                     XK_f,         setlayout,      {.v = &layouts[1]} },
