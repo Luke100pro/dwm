@@ -13,10 +13,11 @@ static unsigned int gappoh    = 10;   // horiz outer gap between windows and scr
 static unsigned int gappov    = 10;   // vert outer gap between windows and screen edge
 static int smartgaps          = 0;    // 1 means no outer gap when there is only one window
 
-//static unsigned int systraypinning  = 0;  // 0: sloppy systray follows selected monitor, >0: pin systray to monitor X
-//static unsigned int systrayspacing  = 2;  // systray spacing
-//static int systraypinningfailfirst  = 1;  // 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor
-//static int showsystray              = 1;  // 0 means no systray
+static unsigned int systraypinning  = 0;  // 0: sloppy systray follows selected monitor, >0: pin systray to monitor X
+static unsigned int systrayspacing  = 2;  // systray spacing
+static int systraypinningfailfirst  = 1;  // 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor
+static int showsystray              = 1;  // 0 means no systray
+static int systrayiconsize          = 12; // max icon size
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -31,27 +32,27 @@ static char selbordercolor[]  = "#005577";
 static char selbgcolor[]      = "#005577";
 static char urgbordercolor[]  = "#ff0000";
 static char *colors[][3] = {
-  [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-  [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-  [SchemeUrg]  = { selfgcolor,  selbgcolor,  urgbordercolor },
+    [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+    [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+    [SchemeUrg]  = { selfgcolor,  selbgcolor,  urgbordercolor },
 };
 
 
 
 // Fonts
 static const char *fonts[] = {
-  "Inter:style=Medium:pixelsize=13:antialias=true:autohint=true",
-  "Noto Color Emoji:pixelsize=11:antialias=true:autohint=true",
-  "monospace:pixelsize=14:antialias=true:autohint=true"
+    "Inter:style=Medium:pixelsize=13:antialias=true:autohint=true",
+    "Noto Color Emoji:pixelsize=11:antialias=true:autohint=true",
+    "monospace:pixelsize=14:antialias=true:autohint=true"
 };
 
 
 
 // Window rules
 static const Rule rules[] = {
-  // class      instance    title       tags mask     isfloating   monitor
-  { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-  { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+    // class      instance    title       tags mask     isfloating   monitor
+    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
+    { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 
@@ -63,62 +64,64 @@ static int resizehints = 1;    // 1 means respect size hints in tiled resizals
 
 #include "layouts.c"
 static const Layout layouts[] = {
-  { "🔁", dwindle },  // bspwm-like
-  { "🔠", tile    },  // master'n'stack
-  { "📉", monocle },  // single window visible
-  { "🌀", spiral  },  // fibonacci
-  { "🦅", NULL    },  // floating windows
-  { NULL, NULL    },  // needed by "cycle-layouts" patch
+    { "🔁", dwindle },  // bspwm-like
+    { "🔠", tile    },  // master'n'stack
+    { "📉", monocle },  // single window visible
+    { "🌀", spiral  },  // fibonacci
+    { "🦅", NULL    },  // floating windows
+    { NULL, NULL    },  // needed by "cycle-layouts" patch
 };
 
 
 
 // Autostart
 static const char *const autostart[] = {
-  "sh", "-c", "setbg",  NULL,
-  "dwmblocks",          NULL,
-  "unclutter",          NULL,
-  "dunst",              NULL,
-  "picom",              NULL,
-  "mpd",                NULL,
-   NULL
+    "sh", "-c", "setbg",  NULL,
+    "dwmblocks",          NULL,
+    "unclutter",          NULL,
+    "dunst",              NULL,
+    "picom",              NULL,
+    "mpd",                NULL,
+     NULL
 };
 
 
 
 // Xresources
 ResourcePref resources[] = {
-  { "normbgcolor",        STRING,  &normbgcolor },
-  { "normbordercolor",    STRING,  &normbordercolor },
-  { "normfgcolor",        STRING,  &normfgcolor },
-  { "selbgcolor",         STRING,  &selbgcolor },
-  { "selbordercolor",     STRING,  &selbordercolor },
-  { "selfgcolor",         STRING,  &selfgcolor },
-  { "urgbordercolor",     STRING,  &urgbordercolor},
-  { "attachdirection",    INTEGER, &attachdirection },
-  { "hidevacanttags",     INTEGER, &hidevacanttags },
-  { "barheight",          INTEGER, &user_bh },
-  { "gappov",             INTEGER, &gappov },
-  { "gappoh",             INTEGER, &gappoh },
-  { "gappiv",             INTEGER, &gappiv },
-  { "gappih",             INTEGER, &gappih },
-  { "borderpx",           INTEGER, &borderpx },
-  { "snap",               INTEGER, &snap },
-  { "showbar",            INTEGER, &showbar },
-  { "topbar",             INTEGER, &topbar },
-  { "nmaster",            INTEGER, &nmaster },
-  { "resizehints",        INTEGER, &resizehints },
-  { "mfact",              FLOAT,   &mfact },
+    { "normbgcolor",        STRING,  &normbgcolor },
+    { "normbordercolor",    STRING,  &normbordercolor },
+    { "normfgcolor",        STRING,  &normfgcolor },
+    { "selbgcolor",         STRING,  &selbgcolor },
+    { "selbordercolor",     STRING,  &selbordercolor },
+    { "selfgcolor",         STRING,  &selfgcolor },
+    { "urgbordercolor",     STRING,  &urgbordercolor},
+
+    { "attachdirection",    INTEGER, &attachdirection },
+    { "hidevacanttags",     INTEGER, &hidevacanttags },
+    { "barheight",          INTEGER, &user_bh },
+    { "gappov",             INTEGER, &gappov },
+    { "gappoh",             INTEGER, &gappoh },
+    { "gappiv",             INTEGER, &gappiv },
+    { "gappih",             INTEGER, &gappih },
+    { "borderpx",           INTEGER, &borderpx },
+    { "snap",               INTEGER, &snap },
+    { "showbar",            INTEGER, &showbar },
+    { "topbar",             INTEGER, &topbar },
+    { "nmaster",            INTEGER, &nmaster },
+    { "resizehints",        INTEGER, &resizehints },
+
+    { "mfact",              FLOAT,   &mfact },
 };
 
 
 
 // Keybindings
 #define TAGKEYS(KEY,TAG) \
-  { Mod4Mask,                       KEY,  view,       {.ui = 1 << TAG} }, \
-  { Mod4Mask|ControlMask,           KEY,  toggleview, {.ui = 1 << TAG} }, \
-  { Mod4Mask|ShiftMask,             KEY,  tag,        {.ui = 1 << TAG} }, \
-  { Mod4Mask|ControlMask|ShiftMask, KEY,  toggletag,  {.ui = 1 << TAG} },
+    { Mod4Mask,                       KEY,  view,       {.ui = 1 << TAG} }, \
+    { Mod4Mask|ControlMask,           KEY,  toggleview, {.ui = 1 << TAG} }, \
+    { Mod4Mask|ShiftMask,             KEY,  tag,        {.ui = 1 << TAG} }, \
+    { Mod4Mask|ControlMask|ShiftMask, KEY,  toggletag,  {.ui = 1 << TAG} },
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 //static char dmenumon[2]       = "0";
@@ -126,95 +129,95 @@ ResourcePref resources[] = {
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 
 static Key keys[] = {
-  // modifier                     key           function        argument
-  { Mod4Mask,                     XK_Return,    spawn,          SHCMD("$TERMINAL") },
-  { Mod4Mask,                     XK_w,         spawn,          SHCMD("$BROWSER") },
-  { Mod4Mask,                     XK_e,         spawn,          SHCMD("$EDITOR") },
+    // modifier                     key           function        argument
+    { Mod4Mask,                     XK_Return,    spawn,          SHCMD("$TERMINAL") },
+    { Mod4Mask,                     XK_w,         spawn,          SHCMD("$BROWSER") },
+    { Mod4Mask,                     XK_e,         spawn,          SHCMD("$EDITOR") },
 
-  { Mod4Mask,                     XK_g,         spawn,          SHCMD("lutris") },
-  { Mod4Mask,                     XK_z,         spawn,          SHCMD("thunar") },
-  { 0,                            XK_Print,     spawn,          SHCMD("screengrab") },
+    { Mod4Mask,                     XK_g,         spawn,          SHCMD("lutris") },
+    { Mod4Mask,                     XK_z,         spawn,          SHCMD("thunar") },
+    { 0,                            XK_Print,     spawn,          SHCMD("screengrab") },
 
-  { Mod4Mask,                     XK_d,         spawn,          SHCMD("dmenurun") },
-  { Mod4Mask,                     XK_Escape,    spawn,          SHCMD("dmenuexit") },
-  { Mod4Mask,                     XK_m,         spawn,          SHCMD("mpdmenu") },
-  { Mod4Mask,                     XK_F9,        spawn,          SHCMD("dmenumount") },
-  { Mod4Mask,                     XK_F10,       spawn,          SHCMD("dmenuumount") },
-  { Mod4Mask,                     XK_grave,     spawn,          SHCMD("dmenuunicode") },
+    { Mod4Mask,                     XK_d,         spawn,          SHCMD("dmenurun") },
+    { Mod4Mask,                     XK_Escape,    spawn,          SHCMD("dmenuexit") },
+    { Mod4Mask,                     XK_m,         spawn,          SHCMD("mpdmenu") },
+    { Mod4Mask,                     XK_F9,        spawn,          SHCMD("dmenumount") },
+    { Mod4Mask,                     XK_F10,       spawn,          SHCMD("dmenuumount") },
+    { Mod4Mask,                     XK_grave,     spawn,          SHCMD("dmenuunicode") },
 
-  { Mod4Mask,                     XK_Page_Up,   spawn,          SHCMD("vmc up") },
-  { Mod4Mask,                     XK_Page_Down, spawn,          SHCMD("vmc down") },
-  { Mod4Mask,                     XK_End,       spawn,          SHCMD("vmc next") },
-  { Mod4Mask,                     XK_Begin,     spawn,          SHCMD("vmc prev") },
-  { Mod4Mask,                     XK_Insert,    spawn,          SHCMD("vmc toggle") },
-  { Mod4Mask,                     XK_Delete,    spawn,          SHCMD("vmc mute") },
+    { Mod4Mask,                     XK_Page_Up,   spawn,          SHCMD("vmc up") },
+    { Mod4Mask,                     XK_Page_Down, spawn,          SHCMD("vmc down") },
+    { Mod4Mask,                     XK_End,       spawn,          SHCMD("vmc next") },
+    { Mod4Mask,                     XK_Begin,     spawn,          SHCMD("vmc prev") },
+    { Mod4Mask,                     XK_Insert,    spawn,          SHCMD("vmc toggle") },
+    { Mod4Mask,                     XK_Delete,    spawn,          SHCMD("vmc mute") },
 
-  { Mod4Mask,                     XK_b,         togglebar,      {0} },
-  { Mod4Mask,                     XK_j,         focusstack,     {.i = +1 } },
-  { Mod4Mask,                     XK_k,         focusstack,     {.i = -1 } },
-  { Mod4Mask,                     XK_i,         incnmaster,     {.i = +1 } },
-  { Mod4Mask,                     XK_o,         incnmaster,     {.i = -1 } },
-  { Mod4Mask,                     XK_h,         setmfact,       {.f = -0.05} },
-  { Mod4Mask,                     XK_l,         setmfact,       {.f = +0.05} },
-  { Mod4Mask|Mod1Mask,            XK_0,         togglegaps,     {0} },
-  { Mod4Mask|Mod1Mask|ShiftMask,  XK_0,         defaultgaps,    {0} },
+    { Mod4Mask,                     XK_b,         togglebar,      {0} },
+    { Mod4Mask,                     XK_j,         focusstack,     {.i = +1 } },
+    { Mod4Mask,                     XK_k,         focusstack,     {.i = -1 } },
+    { Mod4Mask,                     XK_i,         incnmaster,     {.i = +1 } },
+    { Mod4Mask,                     XK_o,         incnmaster,     {.i = -1 } },
+    { Mod4Mask,                     XK_h,         setmfact,       {.f = -0.05} },
+    { Mod4Mask,                     XK_l,         setmfact,       {.f = +0.05} },
+    { Mod4Mask|Mod1Mask,            XK_0,         togglegaps,     {0} },
+    { Mod4Mask|Mod1Mask|ShiftMask,  XK_0,         defaultgaps,    {0} },
 
-  { Mod4Mask|ShiftMask,           XK_Return,    zoom,           {0} },
-  { Mod4Mask,                     XK_q,         killclient,     {0} },
-  { Mod4Mask|ShiftMask,           XK_q,         quit,           {0} },
+    { Mod4Mask|ShiftMask,           XK_Return,    zoom,           {0} },
+    { Mod4Mask,                     XK_q,         killclient,     {0} },
+    { Mod4Mask|ShiftMask,           XK_q,         quit,           {0} },
 
-  { Mod4Mask,                     XK_space,     togglefloating, {0} },
-//{ Mod4Mask|ShiftMask,           XK_space,     setlayout,      {0} },
-//{ Mod4Mask,                     XK_t,         setlayout,      {.v = &layouts[0]} },
-//{ Mod4Mask,                     XK_f,         setlayout,      {.v = &layouts[1]} },
-//{ Mod4Mask,                     XK_m,         setlayout,      {.v = &layouts[2]} },
-//{ Mod4Mask,                     XK_r,         setlayout,      {.v = &layouts[3]} },
-//{ Mod4Mask|ShiftMask,           XK_r,         setlayout,      {.v = &layouts[4]} },
-  { Mod4Mask|Mod1Mask,            XK_comma,     cyclelayout,    {.i = -1 } },
-  { Mod4Mask|Mod1Mask,            XK_period,    cyclelayout,    {.i = +1 } },
+    { Mod4Mask,                     XK_space,     togglefloating, {0} },
+//  { Mod4Mask|ShiftMask,           XK_space,     setlayout,      {0} },
+//  { Mod4Mask,                     XK_t,         setlayout,      {.v = &layouts[0]} },
+//  { Mod4Mask,                     XK_f,         setlayout,      {.v = &layouts[1]} },
+//  { Mod4Mask,                     XK_m,         setlayout,      {.v = &layouts[2]} },
+//  { Mod4Mask,                     XK_r,         setlayout,      {.v = &layouts[3]} },
+//  { Mod4Mask|ShiftMask,           XK_r,         setlayout,      {.v = &layouts[4]} },
+    { Mod4Mask|Mod1Mask,            XK_comma,     cyclelayout,    {.i = -1 } },
+    { Mod4Mask|Mod1Mask,            XK_period,    cyclelayout,    {.i = +1 } },
 
-  { Mod4Mask,                     XK_comma,     focusmon,       {.i = -1 } },
-  { Mod4Mask,                     XK_period,    focusmon,       {.i = +1 } },
-  { Mod4Mask|ShiftMask,           XK_comma,     tagmon,         {.i = -1 } },
-  { Mod4Mask|ShiftMask,           XK_period,    tagmon,         {.i = +1 } },
+    { Mod4Mask,                     XK_comma,     focusmon,       {.i = -1 } },
+    { Mod4Mask,                     XK_period,    focusmon,       {.i = +1 } },
+    { Mod4Mask|ShiftMask,           XK_comma,     tagmon,         {.i = -1 } },
+    { Mod4Mask|ShiftMask,           XK_period,    tagmon,         {.i = +1 } },
 
-  { Mod4Mask,                     XK_Tab,       view,           {0} },
-  { Mod4Mask,                     XK_0,         view,           {.ui = ~0 } },
-  { Mod4Mask|ShiftMask,           XK_0,         tag,            {.ui = ~0 } },
-  TAGKEYS(XK_1, 0)
-  TAGKEYS(XK_2, 1)
-  TAGKEYS(XK_3, 2)
-  TAGKEYS(XK_4, 3)
-  TAGKEYS(XK_5, 4)
-  TAGKEYS(XK_6, 5)
-  TAGKEYS(XK_7, 6)
-  TAGKEYS(XK_8, 7)
-  TAGKEYS(XK_9, 8)
+    { Mod4Mask,                     XK_Tab,       view,           {0} },
+    { Mod4Mask,                     XK_0,         view,           {.ui = ~0 } },
+    { Mod4Mask|ShiftMask,           XK_0,         tag,            {.ui = ~0 } },
+    TAGKEYS(XK_1, 0)
+    TAGKEYS(XK_2, 1)
+    TAGKEYS(XK_3, 2)
+    TAGKEYS(XK_4, 3)
+    TAGKEYS(XK_5, 4)
+    TAGKEYS(XK_6, 5)
+    TAGKEYS(XK_7, 6)
+    TAGKEYS(XK_8, 7)
+    TAGKEYS(XK_9, 8)
 };
 
 
 // Mouse bindings
 static Button buttons[] = {
-  //click           event mask  button    function        argument
-  { ClkLtSymbol,    0,          Button1,  setlayout,      {.v = &layouts[0]} },
-  { ClkLtSymbol,    0,          Button4,  cyclelayout,    {.i = +1} },
-  { ClkLtSymbol,    0,          Button5,  cyclelayout,    {.i = -1} },
+    //click           event mask  button    function        argument
+    { ClkLtSymbol,    0,          Button1,  setlayout,      {.v = &layouts[0]} },
+    { ClkLtSymbol,    0,          Button4,  cyclelayout,    {.i = +1} },
+    { ClkLtSymbol,    0,          Button5,  cyclelayout,    {.i = -1} },
 
-  { ClkWinTitle,    0,          Button1,  zoom,           {0} },
-  { ClkWinTitle,    0,          Button2,  killclient,     {0} },
+    { ClkWinTitle,    0,          Button1,  zoom,           {0} },
+    { ClkWinTitle,    0,          Button2,  killclient,     {0} },
 
-  { ClkStatusText,  0,          Button1,  sigdwmblocks,   {.i = 1} },
-  { ClkStatusText,  0,          Button2,  sigdwmblocks,   {.i = 2} },
-  { ClkStatusText,  0,          Button3,  sigdwmblocks,   {.i = 3} },
-  { ClkStatusText,  0,          Button4,  sigdwmblocks,   {.i = 4} },
-  { ClkStatusText,  0,          Button5,  sigdwmblocks,   {.i = 5} },
+    { ClkStatusText,  0,          Button1,  sigdwmblocks,   {.i = 1} },
+    { ClkStatusText,  0,          Button2,  sigdwmblocks,   {.i = 2} },
+    { ClkStatusText,  0,          Button3,  sigdwmblocks,   {.i = 3} },
+    { ClkStatusText,  0,          Button4,  sigdwmblocks,   {.i = 4} },
+    { ClkStatusText,  0,          Button5,  sigdwmblocks,   {.i = 5} },
 
-  { ClkClientWin,   Mod4Mask,   Button1,  movemouse,      {0} },
-  { ClkClientWin,   Mod4Mask,   Button2,  togglefloating, {0} },
-  { ClkClientWin,   Mod4Mask,   Button3,  resizemouse,    {0} },
+    { ClkClientWin,   Mod4Mask,   Button1,  movemouse,      {0} },
+    { ClkClientWin,   Mod4Mask,   Button2,  togglefloating, {0} },
+    { ClkClientWin,   Mod4Mask,   Button3,  resizemouse,    {0} },
 
-  { ClkTagBar,      0,          Button1,  view,           {0} },
-  { ClkTagBar,      0,          Button3,  toggleview,     {0} },
-  { ClkTagBar,      Mod4Mask,   Button1,  tag,            {0} },
-  { ClkTagBar,      Mod4Mask,   Button3,  toggletag,      {0} },
+    { ClkTagBar,      0,          Button1,  view,           {0} },
+    { ClkTagBar,      0,          Button3,  toggleview,     {0} },
+    { ClkTagBar,      Mod4Mask,   Button1,  tag,            {0} },
+    { ClkTagBar,      Mod4Mask,   Button3,  toggletag,      {0} },
 };
