@@ -164,18 +164,13 @@ static Key keys[] = {
     { Mod4Mask|Mod1Mask,            XK_equal,     incrgaps,       {.i = +5} },
     { Mod4Mask|Mod1Mask,            XK_minus,     incrgaps,       {.i = -5} },
 
-    { Mod4Mask|ShiftMask,           XK_Return,    zoom,           {0} },
+    { Mod4Mask|ShiftMask,           XK_f,         zoom,           {0} },
+    { Mod4Mask,                     XK_f,         focusmaster,    {0} },
     { Mod4Mask,                     XK_q,         killclient,     {0} },
     { Mod4Mask|ShiftMask,           XK_q,         quit,           {0} },
 
     { Mod4Mask,                     XK_space,     togglefloating, {0} },
     { Mod4Mask,                     XK_F11,       togglefullscr,  {0} },
-//  { Mod4Mask|ShiftMask,           XK_space,     setlayout,      {0} },
-//  { Mod4Mask,                     XK_t,         setlayout,      {.v = &layouts[0]} },
-//  { Mod4Mask,                     XK_f,         setlayout,      {.v = &layouts[1]} },
-//  { Mod4Mask,                     XK_m,         setlayout,      {.v = &layouts[2]} },
-//  { Mod4Mask,                     XK_r,         setlayout,      {.v = &layouts[3]} },
-//  { Mod4Mask|ShiftMask,           XK_r,         setlayout,      {.v = &layouts[4]} },
     { Mod4Mask|Mod1Mask,            XK_comma,     cyclelayout,    {.i = -1 } },
     { Mod4Mask|Mod1Mask,            XK_period,    cyclelayout,    {.i = +1 } },
 

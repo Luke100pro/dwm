@@ -220,6 +220,7 @@ static Client *findbefore(Client *c);
 static void focus(Client *c);
 static void focusin(XEvent *e);
 static void focusmon(const Arg *arg);
+static void focusmaster(const Arg *arg);
 static void focusstack(const Arg *arg);
 static int getdwmblockspid();
 static Atom getatomprop(Client *c, Atom prop);
@@ -1139,6 +1140,18 @@ focusmon(const Arg *arg)
   unfocus(selmon->sel, 0);
   selmon = m;
   focus(NULL);
+}
+
+void
+focusmaster(const Arg *arg)
+{
+    Client *c;
+
+    if (selmon->nmaster < 1)
+        return;
+    c = nexttiled(selmon->clients);
+    if (c)
+        focus(c);
 }
 
 void
