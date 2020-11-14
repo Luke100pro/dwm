@@ -63,12 +63,12 @@ static int resizehints = 1;    // 1 means respect size hints in tiled resizals
 
 #include "layouts.c"
 static const Layout layouts[] = {
-    { "🔁", dwindle },  // bspwm-like
-    { "🔠", tile    },  // master'n'stack
-    { "📉", monocle },  // single window visible
-    { "🌀", spiral  },  // fibonacci
-    { "🦅", NULL    },  // floating windows
-    { NULL, NULL    },  // needed by "cycle-layouts" patch
+    { "[]=",  tile    },  // master'n'stack
+    { "[\\]", dwindle },  // bspwm-like
+//  { "[@]",  spiral  },  // fibonacci
+    { "[M]",  monocle },  // single window visible
+    { "><>",  NULL    },  // floating windows
+    { NULL,   NULL    },  // needed by "cycle-layouts" patch
 };
 
 
@@ -100,18 +100,23 @@ ResourcePref resources[] = {
     { "attachdirection",    INTEGER, &attachdirection },
     { "hidevacanttags",     INTEGER, &hidevacanttags },
     { "barheight",          INTEGER, &user_bh },
-    { "gappov",             INTEGER, &gappov },
-    { "gappoh",             INTEGER, &gappoh },
-    { "gappiv",             INTEGER, &gappiv },
-    { "gappih",             INTEGER, &gappih },
     { "borderpx",           INTEGER, &borderpx },
     { "snap",               INTEGER, &snap },
     { "showbar",            INTEGER, &showbar },
     { "topbar",             INTEGER, &topbar },
     { "nmaster",            INTEGER, &nmaster },
     { "resizehints",        INTEGER, &resizehints },
-
     { "mfact",              FLOAT,   &mfact },
+
+    { "gappov",             INTEGER, &gappov },
+    { "gappoh",             INTEGER, &gappoh },
+    { "gappiv",             INTEGER, &gappiv },
+    { "gappih",             INTEGER, &gappih },
+    { "smartgaps",          INTEGER, &smartgaps },
+
+    { "systraypinning",     INTEGER, &systraypinning },
+    { "systrayspacing",     INTEGER, &systrayspacing },
+    { "showsystray",        INTEGER, &showsystray },
 };
 
 
@@ -123,10 +128,6 @@ ResourcePref resources[] = {
     { Mod4Mask|ShiftMask,             KEY,  tag,        {.ui = 1 << TAG} }, \
     { Mod4Mask|ControlMask|ShiftMask, KEY,  toggletag,  {.ui = 1 << TAG} },
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
-//static char dmenumon[2]       = "0";
-//static const char dmenufont[] = "monospace:size=10";
-//static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 
 static Key keys[] = {
     // modifier                     key           function        argument
@@ -153,6 +154,7 @@ static Key keys[] = {
     { Mod4Mask,                     XK_Delete,    spawn,          SHCMD("vmc mute") },
 
     { Mod4Mask,                     XK_b,         togglebar,      {0} },
+//  { Mod4Mask,                     XK_s,         togglesystray,  {0} },
     { Mod4Mask,                     XK_j,         focusstack,     {.i = +1 } },
     { Mod4Mask,                     XK_k,         focusstack,     {.i = -1 } },
     { Mod4Mask,                     XK_i,         incnmaster,     {.i = +1 } },

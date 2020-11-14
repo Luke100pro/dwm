@@ -9,7 +9,7 @@ static void monocle(Monitor *m);
 static void tile(Monitor *m);
 static void fibonacci(Monitor *m, int s);
 static void dwindle(Monitor *m);
-static void spiral(Monitor *m);
+//static void spiral(Monitor *m);
 
 
 
@@ -129,7 +129,7 @@ tile(Monitor *m)
 }
 
 void monocle(Monitor *m) {
-    unsigned int n = 0;
+    unsigned int n;
     int nx, ny, nw, nh;
     int oh, ov, ih, iv;
     Client *c;
@@ -144,10 +144,6 @@ void monocle(Monitor *m) {
     ny = m->wy + oh;
     nw = m->ww - 2*ov;
     nh = m->wh - 2*oh;
-
-    for (c = m->clients; c; c = c->next)
-        if (ISVISIBLE(c))
-            n++;
 
     for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
         resize(c, nx, ny, nw - (2*c->bw), nh - (2*c->bw), 0);
@@ -221,6 +217,6 @@ void dwindle(Monitor *m) {
     fibonacci(m, 1);
 }
 
-void spiral(Monitor *m) {
-    fibonacci(m, 0);
-}
+//void spiral(Monitor *m) {
+//    fibonacci(m, 0);
+//}
