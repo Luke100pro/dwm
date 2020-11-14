@@ -157,6 +157,8 @@ static Key keys[] = {
 //  { KeyPress, Mod4Mask,                   XK_s,           togglesystray,  {0} },
     { KeyPress, Mod4Mask,                   XK_j,           focusstack,     {.i = +1 } },
     { KeyPress, Mod4Mask,                   XK_k,           focusstack,     {.i = -1 } },
+    { KeyPress, Mod4Mask|ShiftMask,         XK_j,           pushdown,       {0} },
+    { KeyPress, Mod4Mask|ShiftMask,         XK_k,           pushup,         {0} },
     { KeyPress, Mod4Mask,                   XK_i,           incnmaster,     {.i = +1 } },
     { KeyPress, Mod4Mask,                   XK_o,           incnmaster,     {.i = -1 } },
     { KeyPress, Mod4Mask,                   XK_h,           setmfact,       {.f = -0.05} },

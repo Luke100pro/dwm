@@ -240,8 +240,11 @@ static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttagged(Client *c);
 static Client *nexttiled(Client *c);
+static Client *prevtiled(Client *c);
 //static void pop(Client *);
 static void propertynotify(XEvent *e);
+static void pushdown(const Arg *arg);
+static void pushup(const Arg *arg);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
@@ -1568,6 +1571,16 @@ nexttiled(Client *c)
   return c;
 }
 
+Client *
+prevtiled(Client *c) {
+    Client *p, *r;
+
+    for(p = selmon->clients, r = NULL; p && p != c; p = p->next)
+        if(!p->isfloating && ISVISIBLE(p))
+            r = p;
+    return r;
+}
+
 //void
 //pop(Client *c)
 //{
@@ -1623,6 +1636,37 @@ propertynotify(XEvent *e)
     if (ev->atom == netatom[NetWMWindowType])
       updatewindowtype(c);
   }
+}
+
+void
+pushdown(const Arg *arg) {
+    Client *sel = selmon->sel, *c;
+
+    if(!sel || sel->isfloating || sel == nexttiled(selmon->clients))
+        return;
+    if((c = nexttiled(sel->next))) {
+        detach(sel);
+        sel->next = c->next;
+        c->next = sel;
+    }
+    focus(sel);
+    arrange(selmon);
+}
+
+void
+pushup(const Arg *arg) {
+    Client *sel = selmon->sel, *c;
+
+    if(!sel || sel->isfloating)
+        return;
+    if((c = prevtiled(sel)) && c != nexttiled(selmon->clients)) {
+        detach(sel);
+        sel->next = c;
+        for(c = selmon->clients; c->next != sel->next; c = c->next);
+        c->next = sel;
+    }
+    focus(sel);
+    arrange(selmon);
 }
 
 void
