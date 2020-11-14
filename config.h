@@ -6,6 +6,7 @@ static int topbar             = 1;    // 0 means bottom bar
 static int user_bh            = 24;   // 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height
 static int attachdirection    = 4;    // 0 default, 1 above, 2 aside, 3 below, 4 bottom, 5 top
 static int hidevacanttags     = 1;    // 0 means to not hide empty tags
+static int swallowfloating    = 0;    // 1 means swallow floating windows by default
 
 static unsigned int gappih    = 10;   // horiz inner gap between windows
 static unsigned int gappiv    = 10;   // vert inner gap between windows
@@ -49,9 +50,9 @@ static const char *fonts[] = {
 
 // Window rules
 static const Rule rules[] = {
-    // class      instance    title       tags mask     isfloating   monitor
-    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-    { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+    // class, instance, title, tags mask, isfloating, isterminal, noswallow, monitor
+    { "St", NULL, NULL, 0, 0, 1, 0, -1 },
+    { NULL, NULL, "Event Tester", 0, 0, 0, 1, -1 } // xev
 };
 
 
