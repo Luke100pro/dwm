@@ -123,67 +123,67 @@ ResourcePref resources[] = {
 
 // Keybindings
 #define TAGKEYS(KEY,TAG) \
-    { Mod4Mask,                       KEY,  view,       {.ui = 1 << TAG} }, \
-    { Mod4Mask|ControlMask,           KEY,  toggleview, {.ui = 1 << TAG} }, \
-    { Mod4Mask|ShiftMask,             KEY,  tag,        {.ui = 1 << TAG} }, \
-    { Mod4Mask|ControlMask|ShiftMask, KEY,  toggletag,  {.ui = 1 << TAG} },
+    { KeyPress, Mod4Mask,                       KEY,  view,       {.ui = 1 << TAG} }, \
+    { KeyPress, Mod4Mask|ControlMask,           KEY,  toggleview, {.ui = 1 << TAG} }, \
+    { KeyPress, Mod4Mask|ShiftMask,             KEY,  tag,        {.ui = 1 << TAG} }, \
+    { KeyPress, Mod4Mask|ControlMask|ShiftMask, KEY,  toggletag,  {.ui = 1 << TAG} },
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static Key keys[] = {
-    // modifier                     key           function        argument
-    { Mod4Mask,                     XK_Return,    spawn,          SHCMD("$TERMINAL") },
-    { Mod4Mask,                     XK_w,         spawn,          SHCMD("$BROWSER") },
-    { Mod4Mask,                     XK_e,         spawn,          SHCMD("$EDITOR") },
+    //type      modifier                    key             function        argument
+    { KeyPress, Mod4Mask,                   XK_Return,      spawn,          SHCMD("$TERMINAL") },
+    { KeyPress, Mod4Mask,                   XK_w,           spawn,          SHCMD("$BROWSER") },
+    { KeyPress, Mod4Mask,                   XK_e,           spawn,          SHCMD("$EDITOR") },
 
-    { Mod4Mask,                     XK_g,         spawn,          SHCMD("lutris") },
-    { Mod4Mask,                     XK_z,         spawn,          SHCMD("thunar") },
-    { 0,                            XK_Print,     spawn,          SHCMD("screengrab") },
+    { KeyPress, Mod4Mask,                   XK_g,           spawn,          SHCMD("lutris") },
+    { KeyPress, Mod4Mask,                   XK_z,           spawn,          SHCMD("thunar") },
+    { KeyPress, 0,                          XK_Print,       spawn,          SHCMD("screengrab") },
 
-    { Mod4Mask,                     XK_d,         spawn,          SHCMD("dmenurun") },
-    { Mod4Mask,                     XK_Escape,    spawn,          SHCMD("dmenuexit") },
-    { Mod4Mask,                     XK_m,         spawn,          SHCMD("mpdmenu") },
-    { Mod4Mask,                     XK_F9,        spawn,          SHCMD("dmenumount") },
-    { Mod4Mask,                     XK_F10,       spawn,          SHCMD("dmenuumount") },
-    { Mod4Mask,                     XK_grave,     spawn,          SHCMD("dmenuunicode") },
+    { KeyPress, Mod4Mask,                   XK_d,           spawn,          SHCMD("dmenurun") },
+    { KeyPress, Mod4Mask,                   XK_Escape,      spawn,          SHCMD("dmenuexit") },
+    { KeyPress, Mod4Mask,                   XK_m,           spawn,          SHCMD("mpdmenu") },
+    { KeyPress, Mod4Mask,                   XK_F9,          spawn,          SHCMD("dmenumount") },
+    { KeyPress, Mod4Mask,                   XK_F10,         spawn,          SHCMD("dmenuumount") },
+    { KeyPress, Mod4Mask,                   XK_grave,       spawn,          SHCMD("dmenuunicode") },
 
-    { Mod4Mask,                     XK_Page_Up,   spawn,          SHCMD("vmc up") },
-    { Mod4Mask,                     XK_Page_Down, spawn,          SHCMD("vmc down") },
-    { Mod4Mask,                     XK_End,       spawn,          SHCMD("vmc next") },
-    { Mod4Mask,                     XK_Begin,     spawn,          SHCMD("vmc prev") },
-    { Mod4Mask,                     XK_Insert,    spawn,          SHCMD("vmc toggle") },
-    { Mod4Mask,                     XK_Delete,    spawn,          SHCMD("vmc mute") },
+    { KeyPress, Mod4Mask,                   XK_Page_Up,     spawn,          SHCMD("vmc up") },
+    { KeyPress, Mod4Mask,                   XK_Page_Down,   spawn,          SHCMD("vmc down") },
+    { KeyPress, Mod4Mask,                   XK_End,         spawn,          SHCMD("vmc next") },
+    { KeyPress, Mod4Mask,                   XK_Begin,       spawn,          SHCMD("vmc prev") },
+    { KeyPress, Mod4Mask,                   XK_Insert,      spawn,          SHCMD("vmc toggle") },
+    { KeyPress, Mod4Mask,                   XK_Delete,      spawn,          SHCMD("vmc mute") },
 
-    { Mod4Mask,                     XK_b,         togglebar,      {0} },
-//  { Mod4Mask,                     XK_s,         togglesystray,  {0} },
-    { Mod4Mask,                     XK_j,         focusstack,     {.i = +1 } },
-    { Mod4Mask,                     XK_k,         focusstack,     {.i = -1 } },
-    { Mod4Mask,                     XK_i,         incnmaster,     {.i = +1 } },
-    { Mod4Mask,                     XK_o,         incnmaster,     {.i = -1 } },
-    { Mod4Mask,                     XK_h,         setmfact,       {.f = -0.05} },
-    { Mod4Mask,                     XK_l,         setmfact,       {.f = +0.05} },
-    { Mod4Mask|Mod1Mask,            XK_BackSpace, togglegaps,     {0} },
-    { Mod4Mask|Mod1Mask,            XK_0,         defaultgaps,    {0} },
-    { Mod4Mask|Mod1Mask,            XK_equal,     incrgaps,       {.i = +5} },
-    { Mod4Mask|Mod1Mask,            XK_minus,     incrgaps,       {.i = -5} },
+    { KeyPress, Mod4Mask,                   XK_b,           togglebar,      {0} },
+//  { KeyPress, Mod4Mask,                   XK_s,           togglesystray,  {0} },
+    { KeyPress, Mod4Mask,                   XK_j,           focusstack,     {.i = +1 } },
+    { KeyPress, Mod4Mask,                   XK_k,           focusstack,     {.i = -1 } },
+    { KeyPress, Mod4Mask,                   XK_i,           incnmaster,     {.i = +1 } },
+    { KeyPress, Mod4Mask,                   XK_o,           incnmaster,     {.i = -1 } },
+    { KeyPress, Mod4Mask,                   XK_h,           setmfact,       {.f = -0.05} },
+    { KeyPress, Mod4Mask,                   XK_l,           setmfact,       {.f = +0.05} },
+    { KeyPress, Mod4Mask|Mod1Mask,          XK_BackSpace,   togglegaps,     {0} },
+    { KeyPress, Mod4Mask|Mod1Mask,          XK_0,           defaultgaps,    {0} },
+    { KeyPress, Mod4Mask|Mod1Mask,          XK_equal,       incrgaps,       {.i = +5} },
+    { KeyPress, Mod4Mask|Mod1Mask,          XK_minus,       incrgaps,       {.i = -5} },
 
-    { Mod4Mask|ShiftMask,           XK_f,         zoom,           {0} },
-    { Mod4Mask,                     XK_f,         focusmaster,    {0} },
-    { Mod4Mask,                     XK_q,         killclient,     {0} },
-    { Mod4Mask|ShiftMask,           XK_q,         quit,           {0} },
+    { KeyPress, Mod4Mask|ShiftMask,         XK_f,           zoom,           {0} },
+    { KeyPress, Mod4Mask,                   XK_f,           focusmaster,    {0} },
+    { KeyPress, Mod4Mask,                   XK_q,           killclient,     {0} },
+    { KeyPress, Mod4Mask|ShiftMask,         XK_q,           quit,           {0} },
 
-    { Mod4Mask,                     XK_space,     togglefloating, {0} },
-    { Mod4Mask,                     XK_F11,       togglefullscr,  {0} },
-    { Mod4Mask|Mod1Mask,            XK_comma,     cyclelayout,    {.i = -1 } },
-    { Mod4Mask|Mod1Mask,            XK_period,    cyclelayout,    {.i = +1 } },
+    { KeyPress, Mod4Mask,                   XK_space,       togglefloating, {0} },
+    { KeyPress, Mod4Mask,                   XK_F11,         togglefullscr,  {0} },
+    { KeyPress, Mod4Mask|Mod1Mask,          XK_comma,       cyclelayout,    {.i = -1 } },
+    { KeyPress, Mod4Mask|Mod1Mask,          XK_period,      cyclelayout,    {.i = +1 } },
 
-    { Mod4Mask,                     XK_comma,     focusmon,       {.i = -1 } },
-    { Mod4Mask,                     XK_period,    focusmon,       {.i = +1 } },
-    { Mod4Mask|ShiftMask,           XK_comma,     tagmon,         {.i = -1 } },
-    { Mod4Mask|ShiftMask,           XK_period,    tagmon,         {.i = +1 } },
+    { KeyPress, Mod4Mask,                   XK_comma,       focusmon,       {.i = -1 } },
+    { KeyPress, Mod4Mask,                   XK_period,      focusmon,       {.i = +1 } },
+    { KeyPress, Mod4Mask|ShiftMask,         XK_comma,       tagmon,         {.i = -1 } },
+    { KeyPress, Mod4Mask|ShiftMask,         XK_period,      tagmon,         {.i = +1 } },
 
-    { Mod4Mask,                     XK_Tab,       view,           {0} },
-    { Mod4Mask,                     XK_0,         view,           {.ui = ~0 } },
-    { Mod4Mask|ShiftMask,           XK_0,         tag,            {.ui = ~0 } },
+    { KeyPress, Mod4Mask,                   XK_Tab,         view,           {0} },
+    { KeyPress, Mod4Mask,                   XK_0,           view,           {.ui = ~0 } },
+    { KeyPress, Mod4Mask|ShiftMask,         XK_0,           tag,            {.ui = ~0 } },
     TAGKEYS(XK_1, 0)
     TAGKEYS(XK_2, 1)
     TAGKEYS(XK_3, 2)
