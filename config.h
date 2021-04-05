@@ -5,7 +5,7 @@ static int showbar            = 1;    // 0 means no bar
 static int topbar             = 1;    // 0 means bottom bar
 static int user_bh            = 24;   // 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height
 static int attachdirection    = 4;    // 0 default, 1 above, 2 aside, 3 below, 4 bottom, 5 top
-static int hidevacanttags     = 1;    // 0 means to not hide empty tags
+static int hidevacanttags     = 0;    // 0 means to not hide empty tags
 static int swallowfloating    = 0;    // 1 means swallow floating windows by default
 
 static unsigned int gappih    = 10;   // horiz inner gap between windows
@@ -41,7 +41,7 @@ static char *colors[][3] = {
 
 // Fonts
 static const char *fonts[] = {
-    "Inter:style=Medium:pixelsize=13:antialias=true:autohint=true",
+    "JetBrains Mono Nerd Font:style=Medium:pixelsize=13:antialias=true:autohint=true",
     "Noto Color Emoji:pixelsize=11:antialias=true:autohint=true",
     "monospace:pixelsize=14:antialias=true:autohint=true"
 };
@@ -52,13 +52,14 @@ static const char *fonts[] = {
 static const Rule rules[] = {
     // class, instance, title, tags mask, isfloating, isterminal, noswallow, monitor
     { "St", NULL, NULL, 0, 0, 1, 0, -1 },
+    { "Alacritty", NULL, NULL, 0, 0, 1, 0, -1 },
     { NULL, NULL, "Event Tester", 0, 0, 0, 1, -1 } // xev
 };
 
 
 
 // Layouts
-static float mfact     = 0.51; // factor of master area size [0.05..0.95]
+static float mfact     = 0.5;  // factor of master area size [0.05..0.95]
 static int nmaster     = 1;    // number of clients in master area
 static int resizehints = 1;    // 1 means respect size hints in tiled resizals
 
@@ -76,14 +77,13 @@ static const Layout layouts[] = {
 
 // Autostart
 static const char *const autostart[] = {
-    "st", "-e", "cd", "~/.local/src/dwm", NULL,
-    "sh", "-c", "setbg",  NULL,
-    "dwmblocks",          NULL,
-    "unclutter",          NULL,
-    "dunst",              NULL,
-    "picom",              NULL,
-    "mpd",                NULL,
-     NULL
+    "setupx", NULL,
+    "dwmblocks", NULL,
+    "unclutter", NULL,
+    "dunst", NULL,
+    "picom", NULL,
+    "mpd", NULL,
+    NULL
 };
 
 
@@ -134,25 +134,25 @@ static Key keys[] = {
     //type      modifier                    key             function        argument
     { KeyPress, Mod4Mask,                   XK_Return,      spawn,          SHCMD("$TERMINAL") },
     { KeyPress, Mod4Mask,                   XK_w,           spawn,          SHCMD("$BROWSER") },
-    { KeyPress, Mod4Mask,                   XK_e,           spawn,          SHCMD("$EDITOR") },
 
     { KeyPress, Mod4Mask,                   XK_g,           spawn,          SHCMD("lutris") },
     { KeyPress, Mod4Mask,                   XK_z,           spawn,          SHCMD("thunar") },
     { KeyPress, 0,                          XK_Print,       spawn,          SHCMD("screengrab") },
 
-    { KeyPress, Mod4Mask,                   XK_d,           spawn,          SHCMD("dmenurun") },
-    { KeyPress, Mod4Mask,                   XK_Escape,      spawn,          SHCMD("dmenuexit") },
-    { KeyPress, Mod4Mask,                   XK_m,           spawn,          SHCMD("mpdmenu") },
-    { KeyPress, Mod4Mask,                   XK_F9,          spawn,          SHCMD("dmenumount") },
-    { KeyPress, Mod4Mask,                   XK_F10,         spawn,          SHCMD("dmenuumount") },
-    { KeyPress, Mod4Mask,                   XK_grave,       spawn,          SHCMD("dmenuunicode") },
+    { KeyPress, Mod4Mask,                   XK_d,           spawn,          SHCMD("dmrun") },
+    { KeyPress, Mod4Mask,                   XK_Escape,      spawn,          SHCMD("dmexit") },
+    { KeyPress, Mod4Mask,                   XK_m,           spawn,          SHCMD("dmmpd") },
+    { KeyPress, Mod4Mask,                   XK_s,           spawn,          SHCMD("dmsearch") },
+    { KeyPress, Mod4Mask,                   XK_F9,          spawn,          SHCMD("dmmount") },
+    { KeyPress, Mod4Mask,                   XK_F10,         spawn,          SHCMD("dmumount") },
+    { KeyPress, Mod4Mask,                   XK_period,       spawn,         SHCMD("dmunicode") },
 
-    { KeyPress, Mod4Mask,                   XK_Page_Up,     spawn,          SHCMD("vmc up") },
-    { KeyPress, Mod4Mask,                   XK_Page_Down,   spawn,          SHCMD("vmc down") },
-    { KeyPress, Mod4Mask,                   XK_End,         spawn,          SHCMD("vmc next") },
-    { KeyPress, Mod4Mask,                   XK_Begin,       spawn,          SHCMD("vmc prev") },
     { KeyPress, Mod4Mask,                   XK_Insert,      spawn,          SHCMD("vmc toggle") },
     { KeyPress, Mod4Mask,                   XK_Delete,      spawn,          SHCMD("vmc mute") },
+    { KeyPress, Mod4Mask,                   XK_Begin,       spawn,          SHCMD("vmc prev") },
+    { KeyPress, Mod4Mask,                   XK_End,         spawn,          SHCMD("vmc next") },
+    { KeyPress, Mod4Mask,                   XK_Page_Up,     spawn,          SHCMD("vmc up") },
+    { KeyPress, Mod4Mask,                   XK_Page_Down,   spawn,          SHCMD("vmc down") },
 
     { KeyPress, Mod4Mask,                   XK_b,           togglebar,      {0} },
 //  { KeyPress, Mod4Mask,                   XK_s,           togglesystray,  {0} },
