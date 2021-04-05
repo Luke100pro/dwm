@@ -14,10 +14,11 @@ static unsigned int gappoh    = 10;   // horiz outer gap between windows and scr
 static unsigned int gappov    = 10;   // vert outer gap between windows and screen edge
 static int smartgaps          = 0;    // 1 means no outer gap when there is only one window
 
-static unsigned int systraypinning  = 0;  // 0: sloppy systray follows selected monitor, >0: pin systray to monitor X
-static unsigned int systrayspacing  = 2;  // systray spacing
-static int systraypinningfailfirst  = 1;  // 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor
-static int showsystray              = 1;  // 0 means no systray
+static unsigned int systraypinning   = 0;  // 0: sloppy systray follows selected monitor, >0: pin systray to monitor X
+static unsigned int systrayspacing   = 6;  // systray spacing
+static unsigned int systrayforcesize = 16; // Size of systray icon
+static int systraypinningfailfirst   = 1;  // 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor
+static int showsystray               = 1;  // 0 means no systray
 
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
