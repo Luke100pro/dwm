@@ -26,17 +26,20 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 
 // Colors
-static char normbgcolor[]     = "#1E2127"; // "#222222";
-static char normbordercolor[] = "#1E1E1E"; // "#444444";
-static char normfgcolor[]     = "#ABB2BF"; // "#bbbbbb";
-static char selbgcolor[]      = "#61AFEF"; // "#005577";
-static char selbordercolor[]  = "#61AFEF"; // "#005577";
-static char selfgcolor[]      = "#1E2127"; // "#eeeeee";
-static char urgbordercolor[]  = "#E06C75"; // "#ff0000";
+static char normbgcolor[]     = "#2C323C"; // "#222222"
+static char normbordercolor[] = "#2C323C"; // "#444444"
+static char normfgcolor[]     = "#ABB2BF"; // "#bbbbbb"
+static char selbgcolor[]      = "#61AFEF"; // "#005577"
+static char selbordercolor[]  = "#61AFEF"; // "#005577"
+static char selfgcolor[]      = "#1E2127"; // "#eeeeee"
+static char urgbordercolor[]  = "#E06C75"; // "#ff0000"
+static char titlebgcolor[]    = "#1E2127"; // "#222222"
+static char titlefgcolor[]    = "#ABB2BF"; // "#222222"
 static char *colors[][3] = {
-    [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-    [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-    [SchemeUrg]  = { selfgcolor,  selbgcolor,  urgbordercolor },
+    [SchemeNorm]  = { normfgcolor,  normbgcolor,  normbordercolor },
+    [SchemeSel]   = { selfgcolor,   selbgcolor,   selbordercolor  },
+    [SchemeUrg]   = { selfgcolor,   selbgcolor,   urgbordercolor  },
+    [SchemeTitle] = { titlefgcolor, titlebgcolor, normbordercolor },
 };
 
 

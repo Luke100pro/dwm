@@ -83,7 +83,7 @@
 
 // enums
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeUrg, SchemeTitle }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -1056,7 +1056,7 @@ drawbar(Monitor *m)
 
   if ((w = m->ww - tw - stw - x) > bh) {
     if (m->sel) {
-      drw_setscheme(drw, scheme[m == selmon ? SchemeNorm : SchemeNorm]);
+      drw_setscheme(drw, scheme[m == selmon ? SchemeTitle : SchemeTitle]);
 	  if (centertitle) {
 		tlpad = MAX((m->ww - ((int)TEXTW(m->sel->name) - lrpad)) / 2 - x, lrpad / 2);
 		drw_text(drw, x, 0, w, bh, tlpad, m->sel->name, 0);
@@ -1070,7 +1070,7 @@ drawbar(Monitor *m)
 		  drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		}
     } else {
-      drw_setscheme(drw, scheme[SchemeNorm]);
+      drw_setscheme(drw, scheme[SchemeTitle]);
       drw_rect(drw, x, 0, w, bh, 1, 1);
     }
   }
