@@ -67,12 +67,12 @@ static int resizehints = 1;    // 1 means respect size hints in tiled resizals
 
 #include "layouts.c"
 static const Layout layouts[] = {
-    { "[]=",  tile    },  // master'n'stack
-    { "[\\]", dwindle },  // bspwm-like
+    { " tile",  tile    },  // master'n'stack
+    { " bspwm", dwindle },  // bspwm-like
+    { " mono",  monocle },  // single window visible
+    { " float", NULL    },  // floating windows
+    { NULL,      NULL    },  // needed by "cycle-layouts" patch
 //  { "[@]",  spiral  },  // fibonacci
-    { "[M]",  monocle },  // single window visible
-    { "><>",  NULL    },  // floating windows
-    { NULL,   NULL    },  // needed by "cycle-layouts" patch
 };
 
 
