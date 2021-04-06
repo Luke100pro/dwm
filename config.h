@@ -4,6 +4,7 @@ static unsigned int snap      = 32;   // snap pixel
 static int showbar            = 1;    // 0 means no bar
 static int topbar             = 1;    // 0 means bottom bar
 static int user_bh            = 24;   // 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height
+static int centertitle        = 1;    // 0 means that title aligns to the left
 static int attachdirection    = 4;    // 0 default, 1 above, 2 aside, 3 below, 4 bottom, 5 top
 static int hidevacanttags     = 0;    // 0 means to not hide empty tags
 static int swallowfloating    = 0;    // 1 means swallow floating windows by default
