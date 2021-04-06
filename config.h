@@ -42,9 +42,10 @@ static char *colors[][3] = {
 
 // Fonts
 static const char *fonts[] = {
-    "JetBrains Mono Nerd Font:style=Medium:pixelsize=13:antialias=true:autohint=true",
-    "Noto Color Emoji:pixelsize=11:antialias=true:autohint=true",
-    "monospace:pixelsize=14:antialias=true:autohint=true"
+    /* "JetBrains Mono Nerd Font:style=Medium:pixelsize=13:antialias=true:autohint=true", */
+    "Ubuntu Nerd Font:style=Medium:size=9:antialias=true:autohint=true",
+    "Noto Color Emoji:size=8:antialias=true:autohint=true",
+    "monospace:size=9:antialias=true:autohint=true"
 };
 
 
