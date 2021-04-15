@@ -76,7 +76,6 @@ static const Layout layouts[] = {
     { " mono",  monocle },  // single window visible
     { " float", NULL    },  // floating windows
     { NULL,      NULL    },  // needed by "cycle-layouts" patch
-//  { "[@]",  spiral  },  // fibonacci
 };
 
 
@@ -85,7 +84,6 @@ static const Layout layouts[] = {
 static const char *const autostart[] = {
     "setupx", NULL,
     "dwmblocks", NULL,
-    "unclutter", NULL,
     "dunst", NULL,
     "picom", NULL,
     "mpd", NULL,
@@ -143,7 +141,8 @@ static Key keys[] = {
 
     { KeyPress, Mod4Mask,                   XK_g,           spawn,          SHCMD("lutris") },
     { KeyPress, Mod4Mask,                   XK_z,           spawn,          SHCMD("thunar") },
-    { KeyPress, 0,                          XK_Print,       spawn,          SHCMD("screengrab") },
+    { KeyPress, 0,                          XK_Print,       spawn,          SHCMD("flameshot gui") },
+    { KeyPress, ControlMask,                XK_Print,       spawn,          SHCMD("flameshot full") },
 
     { KeyPress, Mod4Mask,                   XK_d,           spawn,          SHCMD("dmrun") },
     { KeyPress, Mod4Mask,                   XK_Escape,      spawn,          SHCMD("dmexit") },
